@@ -45,21 +45,21 @@ def format_bowler_table(html_data):
         player_info = [cell.text.strip() for cell in row.find_all('td')]
         player_name = player_info[0]
         player_data[player_name] = {
+            "Player": player_name,
             "Span": player_info[1],
-            "Mat": int(player_info[2]),
-            "Inns": int(player_info[3]),
-            "Balls": int(player_info[4]),
-            "Mdns": int(player_info[5]),
-            "Runs": int(player_info[6]),
-            "Wkts": int(player_info[7]),
-            "BBI": player_info[8],
-            "Ave": float(player_info[9]),
-            "Econ": float(player_info[10]),
-            "SR": float(player_info[11]),
-            "5": int(player_info[12]),
-            "10": int(player_info[13]),
-            "Ct": int(player_info[14]),
-            "St": int(player_info[15])
+            "Mat": int(player_info[2]) if player_info[2] != '-' else player_info[2],
+            "Inns": int(player_info[3]) if player_info[3] != '-' else player_info[3],
+            "Balls": int(player_info[4]) if player_info[4] != '-' else player_info[4],
+            "Overs": float(player_info[5]) if player_info[5] != '-' else player_info[5],
+            "Mdns": int(player_info[6]) if player_info[6] != '-' else player_info[6],
+            "Runs": int(player_info[7]) if player_info[7] != '-' else player_info[7],
+            "Wkts": int(player_info[8]) if player_info[8] != '-' else player_info[8],
+            "BBI": player_info[9],
+            "Ave": float(player_info[10]) if player_info[10] != '-' else player_info[10],
+            "Econ": float(player_info[11]) if player_info[11] != '-' else player_info[11],
+            "SR": float(player_info[12]) if player_info[12] != '-' else player_info[12],
+            "4": int(player_info[13]) if player_info[13] != '-' else player_info[13],
+            "5": int(player_info[14]) if player_info[14] != '-' else player_info[14]
         }
 
     return player_data
