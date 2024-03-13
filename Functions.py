@@ -33,7 +33,36 @@ def format_batter_table(html_data):
     return player_data
 
 def format_bowler_table(html_data):
-    return None
+    # Parse HTML data
+    soup = BeautifulSoup(html_data, 'html.parser')
+
+    # Find the table body
+    table_body = soup.find('tbody')
+
+    # Extract table rows
+    player_data = {}
+    for row in table_body.find_all('tr'):
+        player_info = [cell.text.strip() for cell in row.find_all('td')]
+        player_name = player_info[0]
+        player_data[player_name] = {
+            "Span": player_info[1],
+            "Mat": int(player_info[2]),
+            "Inns": int(player_info[3]),
+            "Balls": int(player_info[4]),
+            "Mdns": int(player_info[5]),
+            "Runs": int(player_info[6]),
+            "Wkts": int(player_info[7]),
+            "BBI": player_info[8],
+            "Ave": float(player_info[9]),
+            "Econ": float(player_info[10]),
+            "SR": float(player_info[11]),
+            "5": int(player_info[12]),
+            "10": int(player_info[13]),
+            "Ct": int(player_info[14]),
+            "St": int(player_info[15])
+        }
+
+    return player_data
 
 def clear():
     system('cls' if name == 'nt' else 'clear')
