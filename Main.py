@@ -1,28 +1,33 @@
 # Imports
-import json
-import os
-import json
+from Functions import format_batter_table, format_bowler_table, clear
+from requests import get
 
 # Variables
-DATA = "ipl_male_json"
+BATTING_DATA_SOURCE = "https://www.espncricinfo.com/records/tournament/batting-most-runs-career/indian-premier-league-2023-15129"
+BOWLING_DATA_SOURCE = "https://www.espncricinfo.com/records/tournament/averages-bowling/indian-premier-league-2023-15129"
 
-# Functions
-def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-# Remove Old Files
-print("Removing old files...")
-for filename in os.listdir(DATA):
-    if filename.endswith(".json"):
-        file_path = os.path.join(DATA, filename)
-        with open(file_path, "r") as file:
-            data = json.load(file)
-        file_date = data.get("info", {}).get("dates", [])[0]
-        
-        if file_date and file_date >= "2023-01-01":
-            print(f"Processing file: {filename}")
-        else:
-            os.remove(file_path)
-            print(f"File removed: {filename}")
+# Main
 clear()
-print("There are " + str(len(os.listdir(DATA))) + " files left.")
+print("\033[91mIPL Fantasy Points Calculator:\033[0m\n")
+
+#! Batting Calculations
+print("\033[92mBatting Calculations...\033[0m")
+print("\033[90mRuns, Strike Rate, 0s, 50s, 100s, NOs\033[0m")
+
+response = get(BATTING_DATA_SOURCE)
+batting_data = format_batter_table(response.text)
+
+print("\n")
+
+#! Bowling Calculations
+print("\033[92mBowling Calculations...\033[0m")
+print("\033[90mWickets, Maidens, Hat-Tricks, 4+ Wickets, 5+ Wickets, 6+ Wickets, Economy Rate\033[0m")
+
+response = get(BOWLING_DATA_SOURCE)
+bowling_data = format_bowler_table(response.text)
+
+print("\n")
+
+# Results
+print("\033[92mResults\033[0m")
+print(batting_data)
