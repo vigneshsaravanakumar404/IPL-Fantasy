@@ -2,10 +2,18 @@ from bs4 import BeautifulSoup
 from os import system, name
 
 def format_batter_table(html_data):
+    """
+    Formats the HTML data of a batter table and returns a dictionary containing player information.
+
+    Args:
+        html_data (str): The HTML data of the batter table.
+
+    Returns:
+        dict: A dictionary containing player information, where the player name is the key and the player data is the value.
+
+    """
     # Parse HTML data
     soup = BeautifulSoup(html_data, 'html.parser')
-
-    # Find the table body
     table_body = soup.find('tbody')
 
     # Extract table rows
@@ -33,10 +41,22 @@ def format_batter_table(html_data):
     return player_data
 
 def format_bowler_table(html_data):
+    """
+    Parses the HTML data and extracts information from the bowler table.
+
+    Args:
+        html_data (str): The HTML data containing the bowler table.
+
+    Returns:
+        dict: A dictionary containing the formatted bowler data.
+
+    Example:
+        html_data = "<html>...</html>"
+        bowler_data = format_bowler_table(html_data)
+    """
+
     # Parse HTML data
     soup = BeautifulSoup(html_data, 'html.parser')
-
-    # Find the table body
     table_body = soup.find('tbody')
 
     # Extract table rows
@@ -65,4 +85,7 @@ def format_bowler_table(html_data):
     return player_data
 
 def clear():
+    """
+    Clears the console screen.
+    """
     system('cls' if name == 'nt' else 'clear')

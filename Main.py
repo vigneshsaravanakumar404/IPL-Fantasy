@@ -6,7 +6,7 @@ from requests import get
 BATTING_DATA_SOURCE = "https://www.espncricinfo.com/records/tournament/batting-most-runs-career/indian-premier-league-2023-15129"
 BOWLING_DATA_SOURCE = "https://www.espncricinfo.com/records/tournament/bowling-most-wickets-career/indian-premier-league-2023-15129"
 
-# Main
+#* Main
 clear()
 print("\033[91mIPL Fantasy Points Calculator:\033[0m\n")
 
@@ -28,7 +28,7 @@ bowling_data = format_bowler_table(response.text)
 
 print("\n")
 
-# Results
+#* Results
 print("\033[92mResults\033[0m")
 print(batting_data)
 print(bowling_data)
