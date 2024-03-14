@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from os import system, name
 
-def format_batter_table(html_data):
+def format_batter_table(html_data: str):
     """
     Formats the HTML data of a batter table and returns a dictionary containing player information.
 
@@ -40,7 +40,7 @@ def format_batter_table(html_data):
 
     return player_data
 
-def format_bowler_table(html_data):
+def format_bowler_table(html_data: str):
     """
     Parses the HTML data and extracts information from the bowler table.
 
