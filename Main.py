@@ -37,4 +37,3 @@ teams.append(create_team(batting_data, bowling_data, "Team B", B))
 teams.append(create_team(batting_data, bowling_data, "Team A", A))
 teams.append(create_team(batting_data, bowling_data, "Team S", S))
 teams.append(create_team(batting_data, bowling_data, "Team P", P))
-

@@ -54,7 +54,7 @@ class Player:
         yellow += self.sixes * 8 # 8 points per 6
         yellow -= self.zeroDismisals * 6 # -6 points per 0 dismissal
         yellow += self.fifties * 50 # 50 points per 50
-        yellow += self.centuries * 100 # 100 points per 100
+        yellow += int(self.centuries) * 100 # 100 points per 100
         
         # Green
         green = 0
