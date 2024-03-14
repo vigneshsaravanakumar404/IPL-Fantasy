@@ -3,6 +3,7 @@ Things that have to happen manually:
  - Dot Balls
  - 6+ Wickets
  - Highest sr
+ - VC/C
 
 
 
