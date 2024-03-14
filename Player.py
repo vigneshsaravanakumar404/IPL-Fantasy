@@ -111,7 +111,6 @@ class Player:
 
         """ Calculations for MAXES are done else where"""
 
-
     def calculate_bowling_points(self):
             
             # Yellow
@@ -173,7 +172,6 @@ class Player:
                 self.total *= 1.5
             elif self.isC == True:
                 self.total *= 2
-
 
     # Getter Methods for MAX calculations 
     def getAverage(self):
