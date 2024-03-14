@@ -1,5 +1,4 @@
-# [Name, isBowler, Catches, Stumpings, isC, isVC, Catches, Stumpings]
-
+# 
 # Batters
 O = [["DP Conway", False, 0, 0, False, False, 0, 0],
      ["David Warner", False, 0, 0, False, False, 0, 0],
