@@ -1,17 +1,7 @@
-"""
-Things that have to happen manually:
- - Dot Balls
- - 6+ Wickets
- - Highest sr
- - VC/C
-
-
-
-"""
-
 # Imports
-from Functions import format_batter_table, format_bowler_table, clear
+from Functions import format_batter_table, format_bowler_table, clear, create_team
 from requests import get
+from Data import O, W
 
 # Variables
 BATTING_DATA_SOURCE = "https://www.espncricinfo.com/records/tournament/batting-most-runs-career/indian-premier-league-2023-15129"
@@ -42,7 +32,11 @@ bowling_data = format_bowler_table(response.text)
 print("\n")
 
 
-#! Results
-print("\033[92mResults\033[0m")
-print(batting_data)
-print(bowling_data)
+#! Create Players and Teams
+print("\033[92mCreate Players and Teams\033[0m")
+
+
+# Now, create teams using the method
+teams = []
+teams.append(create_team(batting_data, bowling_data, "Team O", O))
+teams.append(create_team(batting_data, bowling_data, "Team W", W))

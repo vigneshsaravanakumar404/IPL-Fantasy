@@ -16,12 +16,15 @@ class Team:
     def getPlayers(self):
         return self.players
     
+    #TODO: Implement MAXES
     def getMaxes(self):
         return None
 
     # Calculations
+    #TODO: Implement MAXES
     def calculate_points(self): # Without MAXES
         pass
-
+    
+    #TODO: Implement MAXES
     def generateTeamReport(self): # Without MAXES
         pass

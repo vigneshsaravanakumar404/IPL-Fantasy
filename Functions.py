@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 from os import system, name
+from Player import Player
+from Team import Team
 
 def format_batter_table(html_data: str):
     """
@@ -89,3 +91,32 @@ def clear():
     Clears the console screen.
     """
     system('cls' if name == 'nt' else 'clear')
+
+def create_team(batting_data, bowling_data, team_name, player_names):
+    players = []
+    for player in player_names:
+        players.append(Player(team_name, player[0], 
+            batting_data.get(player[0], {}).get("Runs", 0), 
+            batting_data.get(player[0], {}).get("SR", 0), 
+            batting_data.get(player[0], {}).get("4s", 0), 
+            batting_data.get(player[0], {}).get("6s", 0), 
+            batting_data.get(player[0], {}).get("0", 0), 
+            batting_data.get(player[0], {}).get("50", 0), 
+            batting_data.get(player[0], {}).get("100", 0), 
+            batting_data.get(player[0], {}).get("NO", 0), 
+            player[1], 
+            batting_data.get(player[0], {}).get("BF", 0), 
+            bowling_data.get(player[0], {}).get("Wkts", 0), 
+            bowling_data.get(player[0], {}).get("4", 0), 
+            bowling_data.get(player[0], {}).get("5", 0), 
+            player[2], 
+            bowling_data.get(player[0], {}).get("Mdns", 0), 
+            bowling_data.get(player[0], {}).get("hattrick", 0), 
+            bowling_data.get(player[0], {}).get("Econ", 0), 
+            bowling_data.get(player[0], {}).get("Overs", 0), 
+            player[3], 
+            player[4], 
+            player[5], 
+            player[6], 
+            player[7]))
+    return Team(team_name, players)

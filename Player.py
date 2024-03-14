@@ -1,12 +1,14 @@
 class Player:
 
-    def __init__(self, team: str, name: str, runs: int, sr: float, fours: int, sixes: int, zeroDismisals: int, fifties: int, centuries: int, notOuts: int, isBowler: bool, ballsFaced: int, wickets: int, fourplus: int, fiveplus: int, sixplus: int, maidens: int, hattrick: int, economy: float, oversBowled: int, dotBalls: int, isVC: bool, isC: bool) -> None:
+    def __init__(self, team: str, name: str, runs: int, sr: float, fours: int, sixes: int, zeroDismisals: int, fifties: int, centuries: int, notOuts: int, isBowler: bool, ballsFaced: int, wickets: int, fourplus: int, fiveplus: int, sixplus: int, maidens: int, hattrick: int, economy: float, oversBowled: int, dotBalls: int, isVC: bool, isC: bool, catches: int, stumpings: int) -> None:
         
         # Initial Variables
         self.team = team
         self.name = name
         self.isVC = isVC
         self.isC = isC
+        self.catches = catches
+        self.stumpings = stumpings
 
         self.runs = runs
         self.sr = sr
@@ -34,6 +36,14 @@ class Player:
         # Calculate Points
         self.calculate_batting_points()
         self.calculate_bowling_points()
+        self.total += self.catches * 25
+        self.total += self.stumpings * 50
+
+        # If the player is a VC or C, multiply the points
+        if self.isVC == True:
+                self.total *= 1.5
+        elif self.isC == True:
+            self.total *= 2
 
     def calculate_batting_points(self):
         
@@ -101,11 +111,7 @@ class Player:
             cyan *= 2
             green *= 2
             yellow *= 2
-        if self.isVC == True:
-                self.total *= 1.5
-        elif self.isC == True:
-            self.total *= 2
-    
+            
         # Total
         self.total = yellow + green + cyan
 
@@ -113,65 +119,63 @@ class Player:
 
     def calculate_bowling_points(self):
             
-            # Yellow
-            yellow = 0
-            yellow += self.wickets * 50 # 50 points per wicket
-            yellow += self.dotBalls * 5 # 5 points per dot ball
-            yellow += self.fourplus * 250 # 250 points per 4 wickets
-            yellow += self.fiveplus * 500 # 500 points per 5 wickets
-            yellow += self.sixplus * 1000 # 1000 points per 6 wickets
-            yellow += self.maidens * 150 # 150 points per maiden
-            yellow += self.hattrick * 750 # 750 points per hattrick
+        # Yellow
+        yellow = 0
+        yellow += self.wickets * 50 # 50 points per wicket
+        yellow += self.dotBalls * 5 # 5 points per dot ball
+        yellow += self.fourplus * 250 # 250 points per 4 wickets
+        yellow += self.fiveplus * 500 # 500 points per 5 wickets
+        yellow += self.sixplus * 1000 # 1000 points per 6 wickets
+        yellow += self.maidens * 150 # 150 points per maiden
+        yellow += self.hattrick * 750 # 750 points per hattrick
+        
+        # Green
+        green = 0
+        if self.wickets > 35:
+            green += 5000
+        elif self.wickets > 30:
+            green += 4000
+        elif self.wickets > 25:
+            green += 3000
+        elif self.wickets > 20:
+            green += 2000
+        elif self.wickets > 15:
+            green += 1000
 
-            
-            # Green
-            green = 0
-            if self.wickets > 35:
-                green += 5000
-            elif self.wickets > 30:
-                green += 4000
-            elif self.wickets > 25:
-                green += 3000
-            elif self.wickets > 20:
-                green += 2000
-            elif self.wickets > 15:
-                green += 1000
+        # Purple
+        purple = 0
+        if self.oversBowled > 5:
+            if self.economy > 11:
+                purple -= 500
+            elif self.economy > 10:
+                purple -= 400
+            elif self.economy > 9:
+                purple -= 200
+            elif self.economy > 8:
+                purple -= 100
+            elif self.economy > 6:
+                purple += 100
+            elif self.economy > 5:
+                purple += 250
+            elif self.economy > 4:
+                purple += 500
+            elif self.economy > 3:
+                purple += 800
+            elif self.economy > 2:
+                purple += 1200
+            elif self.economy > 1:
+                purple += 1500
+            else:
+                purple += 2000
 
-            # Purple
-            purple = 0
-            if self.oversBowled > 5:
-                if self.economy > 11:
-                    purple -= 500
-                elif self.economy > 10:
-                    purple -= 400
-                elif self.economy > 9:
-                    purple -= 200
-                elif self.economy > 8:
-                    purple -= 100
-                elif self.economy > 6:
-                    purple += 100
-                elif self.economy > 5:
-                    purple += 250
-                elif self.economy > 4:
-                    purple += 500
-                elif self.economy > 3:
-                    purple += 800
-                elif self.economy > 2:
-                    purple += 1200
-                elif self.economy > 1:
-                    purple += 1500
-                else:
-                    purple += 2000
+        # If the player is a batsman, double the points
+        if self.isBowler == False: 
+            green *= 2
+            yellow *= 2
+            purple *= 2
 
-            # If the player is a batsman, double the points
-            if self.isBowler == False: 
-                green *= 2
-                yellow *= 2
-                purple *= 2
-            if self.isVC == True:
-                self.total *= 1.5
-            elif self.isC == True:
-                self.total *= 2
+        # Total
+        self.total += yellow + green + purple
 
     # Getter Methods for MAX calculations 
     def getAverage(self):
@@ -227,7 +231,9 @@ class Player:
     
     def getDotBalls(self):
         return None
-
+    
+    def allMaxes(self):
+        return [self.getAverage(), self.getStrikeRate(), self.getScore(), self.get4s(), self.get6s(), self.get50s(), self.get100s(), self.get0s(), self.getNOs(), self.getMaidens(), self.getWickets(), self.getEconomy(), self.getfourplus(), self.getfiveplus(), self.getsixplus(), self.getHattrick(), self.getOversBowled(), self.getDotBalls()]
 
     def __str__(self) -> str:
         return f"{self.name} from {self.team}"
