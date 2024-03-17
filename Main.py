@@ -4,7 +4,7 @@ from requests import get
 from Data import O, W, B, A, S, P
 
 # Variables
-BATTING_DATA_SOURCE = "https://www.espncricinfo.com/records/tournament/batting-most-runs-career/indian-premier-league-2023-15129"
+BATTING_DATA_SOURCE = "https://www.espncricinfo.com/records/tournament/averages-batting/indian-premier-league-2023-15129"
 BOWLING_DATA_SOURCE = "https://www.espncricinfo.com/records/tournament/bowling-most-wickets-career/indian-premier-league-2023-15129"
 
 #! Main
@@ -41,3 +41,4 @@ teams.append(create_team(batting_data, bowling_data, "Team P", P))
 print("\n")
 
 #! Generate Reports
+print("\033[92mGenerate Reports\033[0m")

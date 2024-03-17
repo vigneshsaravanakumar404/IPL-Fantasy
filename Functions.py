@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from os import system, name
 from Player import Player
 from Team import Team
+from pprint import pprint
 
 def format_batter_table(html_data: str):
     """
@@ -40,6 +41,7 @@ def format_batter_table(html_data: str):
             "6s": int(player_info[14]) if player_info[14] != '-' else player_info[14]
         }
 
+    pprint(player_data)
     return player_data
 
 def format_bowler_table(html_data: str):
